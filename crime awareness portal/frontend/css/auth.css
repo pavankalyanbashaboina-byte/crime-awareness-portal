@@ -1,0 +1,268 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f8ff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000080;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-box h2 {
+    margin-bottom: 1.5rem;
+    color: #000080;
+    font-size: 1.8rem;
+}
+
+/* Role Selection Buttons */
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.role-btn {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px; /* No sharp edges */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.role-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.student-btn {
+    background-color: #800080; /* Purple */
+}
+
+.student-btn:hover {
+    background-color: #600060;
+}
+
+.faculty-btn {
+    background-color: #FF8C00; /* Orange */
+}
+
+.faculty-btn:hover {
+    background-color: #CC7000;
+}
+
+.admin-btn {
+    background-color: #008000; /* Green */
+}
+
+.admin-btn:hover {
+    background-color: #006600;
+}
+
+/* Login Forms */
+.login-form {
+    margin-top: 2rem;
+}
+
+.back-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #666;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.back-btn:hover {
+    background-color: #555;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #000080;
+    box-shadow: 0 0 0 2px rgba(0, 0, 128, 0.1);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #000080;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-btn:hover {
+    background-color: #000066;
+    transform: translateY(-2px);
+}
+
+.auth-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.auth-link a {
+    color: #000080;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #000080;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #cccccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    header h1 {
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .auth-box {
+        padding: 1.5rem;
+    }
+
+    .footer-links a {
+        display: block;
+        margin: 0.5rem 0;
+    }
+}
