@@ -1,0 +1,246 @@
+
+{% extends "base.html" %}
+{% block title %}Admin Panel - Crime Awareness Portal{% endblock %}
+{% block header_title %}Crime Awareness Creator - Admin{% endblock %}
+
+{% block nav %}
+    <span class="user-badge">Admin ({{ user_id }})</span>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+{% endblock %}
+
+{% block content %}
+<section class="admin-dashboard">
+    <h2>Admin Dashboard</h2>
+    <p>Manage reports, view analytics, and send action responses to students.</p>
+
+    <div class="card-container" style="margin-bottom:28px;">
+        <div class="card" onclick="showSection('reports')" style="cursor:pointer;">
+            <div class="card-icon">📋</div>
+            <h3>View Reports</h3>
+            <p>Review all submitted misconduct reports.</p>
+        </div>
+        <div class="card" onclick="showSection('analytics')" style="cursor:pointer;">
+            <div class="card-icon">📊</div>
+            <h3>Analytics</h3>
+            <p>View trends and statistics on violations.</p>
+        </div>
+        <div class="card" onclick="showSection('actions')" style="cursor:pointer;">
+            <div class="card-icon">⚡</div>
+            <h3>Action System</h3>
+            <p>Resolve cases and notify students.</p>
+        </div>
+    </div>
+
+    <!-- ── Reports Section ── -->
+    <div id="reportsSection" class="admin-section" style="display:none;">
+        <h3>📋 Submitted Reports</h3>
+        {% if reports %}
+        <div style="overflow-x:auto;">
+        <table class="reports-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Reported By</th>
+                    <th>Reporter Dept</th>
+                    <th>Contact</th>
+                    <th>Accused</th>
+                    <th>Accused Dept</th>
+                    <th>Violation</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reports %}
+                <tr id="row-{{ r.id }}">
+                    <td>{{ r.id }}</td>
+                    <td>
+                        {% if r.anonymous %}
+                            <span style="color:#999;font-style:italic;">Anonymous</span>
+                        {% else %}
+                            <strong>{{ r.reporter_name or r.reported_by or 'N/A' }}</strong>
+                            {% if r.reported_by %}<br><small style="color:#888;">{{ r.reported_by }}</small>{% endif %}
+                        {% endif %}
+                    </td>
+                    <td>{{ r.reporter_dept or '—' }}</td>
+                    <td>{{ r.reporter_contact or '—' }}</td>
+                    <td><strong>{{ r.accused_name }}</strong><br><small style="color:#888;">{{ r.accused_role or '' }}</small></td>
+                    <td>{{ r.department }}</td>
+                    <td><span class="violation-tag">{{ r.violation_type }}</span></td>
+                    <td>{{ r.created_at[:10] if r.created_at else '—' }}</td>
+                    <td><span class="status-badge status-{{ r.status }}">{{ r.status.replace('_',' ') }}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="openActionModal({{ r.id }}, '{{ r.reported_by or '' }}', '{{ r.accused_name }}', '{{ r.violation_type }}')">
+                            ⚡ Take Action
+                        </button>
+                    </td>
+                </tr>
+                <!-- Description row -->
+                <tr style="background:#f9f9ff;">
+                    <td colspan="10" style="padding:10px 14px; font-size:0.82rem; color:#555;">
+                        <strong>📝 Description:</strong> {{ r.description }}
+                        {% if r.action_taken %}
+                        <br><strong style="color:#2e7d32;">✅ Action Taken:</strong> <span style="color:#2e7d32;">{{ r.action_taken }}</span>
+                        {% if r.action_at %}<span style="color:#999; font-size:0.75rem;"> — {{ r.action_at[:10] }}</span>{% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        {% else %}
+        <p class="empty-state">No reports submitted yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- ── Analytics Section ── -->
+    <div id="analyticsSection" class="admin-section" style="display:none;">
+        <h3>📊 Analytics Dashboard</h3>
+        <div class="analytics-grid">
+            <div class="analytics-card total">
+                <span class="analytics-num">{{ total }}</span>
+                <span class="analytics-label">Total Reports</span>
+            </div>
+            <div class="analytics-card pending">
+                <span class="analytics-num">{{ pending }}</span>
+                <span class="analytics-label">Pending</span>
+            </div>
+            <div class="analytics-card resolved">
+                <span class="analytics-num">{{ resolved }}</span>
+                <span class="analytics-label">Resolved</span>
+            </div>
+            <div class="analytics-card" style="background:#f3e5f5;">
+                <span class="analytics-num" style="color:#6a1b9a;">{{ total - pending - resolved }}</span>
+                <span class="analytics-label">Under Review</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Action System Section ── -->
+    <div id="actionsSection" class="admin-section" style="display:none;">
+        <h3>⚡ Action System</h3>
+        <p style="color:#666; margin-bottom:20px;">Click <strong>"Take Action"</strong> on any report in the Reports section to resolve a case and notify the student. The student will receive a notification with your action message.</p>
+        <div style="background:#f5f6ff; border-radius:12px; padding:20px; border-left:4px solid #0000b3;">
+            <h4 style="color:#00006e; margin-bottom:10px;">How it works:</h4>
+            <ol style="padding-left:20px; color:#555; font-size:0.9rem; line-height:2;">
+                <li>Go to <strong>View Reports</strong> and find the case</li>
+                <li>Click <strong>⚡ Take Action</strong> button</li>
+                <li>Type the action taken (e.g. "Student warned, 3-day suspension issued")</li>
+                <li>Click <strong>Send to Student</strong></li>
+                <li>The student will see the notification when they login</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<!-- ── Action Modal ── -->
+<div id="actionModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:16px; padding:36px; max-width:520px; width:90%; box-shadow:0 8px 40px rgba(0,0,0,0.2);">
+        <h3 style="color:#00006e; margin-bottom:6px;">⚡ Take Action</h3>
+        <p id="modalSubtitle" style="color:#666; font-size:0.88rem; margin-bottom:24px;"></p>
+
+        <input type="hidden" id="modalReportId">
+        <input type="hidden" id="modalUserId">
+
+        <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:0.82rem; font-weight:700; color:#444; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Update Status</label>
+            <select id="modalStatus" style="width:100%; padding:10px 14px; border:1.5px solid #c5cae9; border-radius:9px; font-size:0.93rem; font-family:'Poppins',sans-serif;">
+                <option value="pending">Pending</option>
+                <option value="under_review">Under Review</option>
+                <option value="resolved">Resolved</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:0.82rem; font-weight:700; color:#444; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Action Taken / Message to Student</label>
+            <textarea id="modalAction" rows="5" style="width:100%; padding:11px 14px; border:1.5px solid #c5cae9; border-radius:9px; font-size:0.93rem; font-family:'Poppins',sans-serif; resize:vertical;" placeholder="e.g. After investigation, the accused has been given a written warning and 3-day suspension. The Anti-Ragging Committee has been notified. Further violations will result in expulsion."></textarea>
+        </div>
+
+        <div id="modalError" style="color:#c0392b; font-size:0.83rem; margin-bottom:10px;"></div>
+
+        <div style="display:flex; gap:12px;">
+            <button onclick="submitAction()" style="flex:1; padding:12px; background:linear-gradient(135deg,#00006e,#0000b3); color:#fff; border:none; border-radius:9px; font-size:0.95rem; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer;">
+                📨 Send to Student
+            </button>
+            <button onclick="closeModal()" style="padding:12px 20px; background:transparent; color:#666; border:1.5px solid #ccc; border-radius:9px; font-size:0.9rem; font-family:'Poppins',sans-serif; cursor:pointer;">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .action-btn { padding:6px 12px; background:linear-gradient(135deg,#00006e,#0000b3); color:#fff; border:none; border-radius:8px; font-size:0.78rem; font-family:'Poppins',sans-serif; font-weight:600; cursor:pointer; white-space:nowrap; transition:opacity 0.2s; }
+    .action-btn:hover { opacity:0.85; }
+    .violation-tag { background:#e8eaf6; color:#1a237e; padding:3px 10px; border-radius:12px; font-size:0.76rem; font-weight:600; text-transform:capitalize; }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function showSection(name) {
+        ['reports','analytics','actions'].forEach(s => {
+            document.getElementById(s + 'Section').style.display = s === name ? 'block' : 'none';
+        });
+        window.scrollTo(0, 400);
+    }
+
+    function openActionModal(reportId, userId, accusedName, violationType) {
+        document.getElementById('modalReportId').value = reportId;
+        document.getElementById('modalUserId').value   = userId;
+        document.getElementById('modalSubtitle').textContent = `Report #${reportId} — ${accusedName} (${violationType})`;
+        document.getElementById('modalAction').value  = '';
+        document.getElementById('modalError').textContent = '';
+        const modal = document.getElementById('actionModal');
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('actionModal').style.display = 'none';
+    }
+
+    async function submitAction() {
+        const reportId   = document.getElementById('modalReportId').value;
+        const userId     = document.getElementById('modalUserId').value;
+        const status     = document.getElementById('modalStatus').value;
+        const actionText = document.getElementById('modalAction').value.trim();
+        const errorEl    = document.getElementById('modalError');
+
+        if (!actionText) {
+            errorEl.textContent = 'Please enter the action taken before sending.';
+            return;
+        }
+
+        try {
+            const res  = await fetch(`/api/report/${reportId}/action`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ status, action_taken: actionText, user_id: userId })
+            });
+            const json = await res.json();
+            if (json.success) {
+                closeModal();
+                // Update status badge in table
+                const badge = document.querySelector(`#row-${reportId} .status-badge`);
+                if (badge) {
+                    badge.className = `status-badge status-${status}`;
+                    badge.textContent = status.replace('_',' ');
+                }
+                alert('✅ Action saved and notification sent to student!');
+            } else {
+                errorEl.textContent = json.message;
+            }
+        } catch(e) {
+            errorEl.textContent = 'Network error. Please try again.';
+        }
+    }
+
+    // Close modal clicking outside
+    document.getElementById('actionModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+</script>
+{% endblock %}
