@@ -1,0 +1,458 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000080; /* Navy Blue */
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #000080;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+#openDashboardBtn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: #000080;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#openDashboardBtn:hover {
+    background-color: #000066;
+    transform: translateY(-2px);
+}
+
+/* Crime Section */
+.crime-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.crime-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000080;
+}
+
+.crime-section p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.crime-btn {
+    background-color: #000080;
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.crime-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #000066;
+}
+
+/* Color Classes for Buttons */
+.crime-btn.purple { background-color: #000080; }
+.crime-btn.pink { background-color: #000080; color: #f0f6f7; }
+.crime-btn.orange { background-color: #000080; }
+.crime-btn.magenta { background-color: #000080; }
+.crime-btn.green { background-color: #000080; }
+
+.crime-btn.purple:hover { background-color: #000080; }
+.crime-btn.pink:hover { background-color: #000080; }
+.crime-btn.orange:hover { background-color: #000080; }
+.crime-btn.magenta:hover { background-color: #000080; }
+.crime-btn.green:hover { background-color: #000080; }
+
+/* Content Box */
+.content-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #000080; /* Default background color */
+    color: #ffffff; /* White text */
+    border: 3px solid #000080; /* Default border color */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    padding-top: 3rem; /* Make room for close button */
+}
+
+.content-box.show {
+    display: block;
+}
+
+/* Backdrop for modal */
+.content-box.show::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+.content-box h3 {
+    margin-bottom: 1rem;
+    color: #ffffff; /* White text */
+}
+
+.content-box p {
+    margin-bottom: 1rem;
+    color: #ffffff; /* White text */
+}
+
+.content-box table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.content-box th, .content-box td {
+    border: 1px solid #ffffff; /* White borders for table */
+    padding: 0.5rem;
+    text-align: left;
+    color: #ffffff; /* White text */
+}
+
+.content-box th {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000080;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Committees Section */
+.committees-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.committees-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000080;
+}
+
+.committees-section p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.committees-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.committee-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #000080;
+}
+
+.committee-card h3 {
+    margin-bottom: 1rem;
+    color: #000080;
+}
+
+.committee-card p {
+    margin-bottom: 1rem;
+}
+
+.committee-card ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.committee-card li {
+    margin-bottom: 0.5rem;
+}
+
+/* Report Section */
+.report-section {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.report-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000080;
+}
+
+.report-section p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+#reportForm {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #000080;
+    box-shadow: 0 0 0 2px rgba(0, 0, 128, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #000080;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #000066;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: #000080;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: auto;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #cccccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    header h1 {
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    #openDashboardBtn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .content-box {
+        padding: 1rem;
+    }
+
+    .footer-links a {
+        display: block;
+        margin: 0.5rem 0;
+    }
+}
