@@ -1,0 +1,169 @@
+
+{% extends "base.html" %}
+{% block title %}Login - Crime Awareness Portal{% endblock %}
+
+{% block nav %}
+    <a href="{{ url_for('login') }}">Home</a>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <!-- Role Selection -->
+    <div class="auth-box" id="roleSelection">
+        <h2>Select Your Role</h2>
+        <div class="role-buttons">
+            <button class="role-btn student-btn" data-role="student">Student</button>
+            <button class="role-btn faculty-btn" data-role="faculty">Faculty</button>
+            <button class="role-btn admin-btn"   data-role="admin">Admin</button>
+        </div>
+    </div>
+
+    <!-- Student Login -->
+    <div class="auth-box login-form" id="studentForm" style="display:none;">
+        <h2>Student Login</h2>
+        <form id="loginFormStudent">
+            <input type="hidden" name="role" value="student">
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" name="userId" required placeholder="Enter your Student ID">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div class="error-msg" id="studentError"></div>
+            <button type="submit" class="auth-btn">Login as Student</button>
+            <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register</a></p>
+            <button type="button" class="back-btn" onclick="showRoleSelection()">← Back</button>
+        </form>
+    </div>
+
+    <!-- Faculty Login -->
+    <div class="auth-box login-form" id="facultyForm" style="display:none;">
+        <h2>Faculty Login</h2>
+        <form id="loginFormFaculty">
+            <input type="hidden" name="role" value="faculty">
+            <div class="form-group">
+                <label>Faculty ID</label>
+                <input type="text" name="userId" required placeholder="Enter your Faculty ID">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div class="error-msg" id="facultyError"></div>
+            <button type="submit" class="auth-btn">Login as Faculty</button>
+            <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register</a></p>
+            <button type="button" class="back-btn" onclick="showRoleSelection()">← Back</button>
+        </form>
+    </div>
+
+    <!-- Admin Login -->
+    <div class="auth-box login-form" id="adminForm" style="display:none;">
+        <h2>Admin Login</h2>
+        <form id="loginFormAdmin">
+            <input type="hidden" name="role" value="admin">
+            <div class="form-group">
+                <label>Admin ID</label>
+                <input type="text" name="userId" required placeholder="Enter your Admin ID">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div class="error-msg" id="adminError"></div>
+            <button type="submit" class="auth-btn">Login as Admin</button>
+            <button type="button" class="back-btn" onclick="showRoleSelection()">← Back</button>
+        </form>
+    </div>
+
+    <!-- Registration -->
+    <div class="auth-box" id="registrationForm" style="display:none;">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Role</label>
+                <select id="regRole" name="role" required>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>User ID</label>
+                <input type="text" id="regUserId" required placeholder="Enter your User ID">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="regPassword" required placeholder="Enter your password">
+            </div>
+            <div class="error-msg" id="registerError"></div>
+            <button type="submit" class="auth-btn">Register</button>
+            <button type="button" class="back-btn" onclick="showRoleSelection()">← Back</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function showRoleSelection() {
+        document.querySelectorAll('.auth-box').forEach(el => el.style.display = 'none');
+        document.getElementById('roleSelection').style.display = 'block';
+    }
+    function showRegistrationForm() {
+        document.querySelectorAll('.auth-box').forEach(el => el.style.display = 'none');
+        document.getElementById('registrationForm').style.display = 'block';
+    }
+
+    document.querySelectorAll('.role-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.auth-box').forEach(el => el.style.display = 'none');
+            document.getElementById(this.dataset.role + 'Form').style.display = 'block';
+        });
+    });
+
+    async function submitLogin(formId, errorId) {
+        const form    = document.getElementById(formId);
+        const errorEl = document.getElementById(errorId);
+        errorEl.textContent = '';
+        try {
+            const res  = await fetch('/login', { method: 'POST', body: new FormData(form) });
+            const json = await res.json();
+            if (json.success) {
+                window.location.href = json.redirect;
+            } else {
+                errorEl.textContent = json.message;
+            }
+        } catch (e) {
+            errorEl.textContent = 'Network error. Please try again.';
+        }
+    }
+
+    document.getElementById('loginFormStudent').addEventListener('submit', e => { e.preventDefault(); submitLogin('loginFormStudent', 'studentError'); });
+    document.getElementById('loginFormFaculty').addEventListener('submit', e => { e.preventDefault(); submitLogin('loginFormFaculty', 'facultyError'); });
+    document.getElementById('loginFormAdmin').addEventListener('submit',   e => { e.preventDefault(); submitLogin('loginFormAdmin',   'adminError');   });
+
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const errorEl = document.getElementById('registerError');
+        errorEl.textContent = '';
+        const payload = {
+            userId:   document.getElementById('regUserId').value,
+            password: document.getElementById('regPassword').value,
+            role:     document.getElementById('regRole').value
+        };
+        try {
+            const res  = await fetch('/register', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+            const json = await res.json();
+            if (json.success) {
+                alert(json.message);
+                showRoleSelection();
+            } else {
+                errorEl.textContent = json.message;
+            }
+        } catch (e) {
+            errorEl.textContent = 'Network error.';
+        }
+    });
+</script>
+{% endblock %}

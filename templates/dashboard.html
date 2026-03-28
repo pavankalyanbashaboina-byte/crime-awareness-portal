@@ -1,0 +1,98 @@
+
+{% extends "base.html" %}
+{% block title %}Dashboard - Crime Awareness Portal{% endblock %}
+
+{% block nav %}
+    <span class="user-badge">{{ role }} ({{ user_id }})</span>
+    {% if role == 'admin' %}<a href="{{ url_for('admin') }}">Admin Panel</a>{% endif %}
+    <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- Notifications for student/faculty -->
+{% if notifications %}
+<div class="notifications-panel">
+    <h3>🔔 Notifications ({{ notifications|length }})</h3>
+    {% for n in notifications %}
+    <div class="notification-card {% if not n.is_read %}unread{% endif %}">
+        <div class="notif-header">
+            <span class="notif-badge">📋 Report #{{ n.report_id }}</span>
+            <span class="notif-date">{{ n.created_at[:10] if n.created_at else '' }}</span>
+        </div>
+        <p class="notif-message">{{ n.message }}</p>
+        {% if n.action_taken %}
+        <div class="notif-action">
+            <strong>✅ Action Taken by Admin:</strong>
+            <p>{{ n.action_taken }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section class="dashboard">
+    <h2>Welcome to the Dashboard</h2>
+    <p>Select a category to explore crime awareness and ethics information.</p>
+    <div class="card-container">
+        <a class="card" href="{{ url_for('student') }}">
+            <div class="card-icon">👨‍🎓</div>
+            <h3>Crimes by Student</h3>
+            <p>Explore misconduct specific to students including ragging, cheating, and more.</p>
+        </a>
+        <a class="card" href="{{ url_for('faculty') }}">
+            <div class="card-icon">👨‍🏫</div>
+            <h3>Crimes by Faculty</h3>
+            <p>Learn about professional misconduct by faculty members.</p>
+        </a>
+        <a class="card" href="{{ url_for('both') }}">
+            <div class="card-icon">🤝</div>
+            <h3>Crimes by Both</h3>
+            <p>Shared crimes applicable to both students and faculty.</p>
+        </a>
+        <a class="card" href="{{ url_for('committees') }}">
+            <div class="card-icon">🏛️</div>
+            <h3>Committees</h3>
+            <p>Internal authorities responsible for handling misconduct cases.</p>
+        </a>
+        <a class="card" href="{{ url_for('legal') }}">
+            <div class="card-icon">⚖️</div>
+            <h3>Legal & Court Actions</h3>
+            <p>Court procedures, legal consequences, and applicable laws.</p>
+        </a>
+        <a class="card" href="{{ url_for('report') }}">
+            <div class="card-icon">📋</div>
+            <h3>Report Misconduct</h3>
+            <p>Submit a confidential misconduct report safely and securely.</p>
+        </a>
+    </div>
+</section>
+
+<style>
+    .notifications-panel {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-bottom: 28px;
+        box-shadow: 0 3px 16px rgba(0,0,139,0.1);
+        border-left: 5px solid #0000b3;
+    }
+    .notifications-panel h3 { color: #00006e; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+    .notification-card {
+        background: #f5f6ff;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        border: 1px solid #e8eaf6;
+    }
+    .notification-card.unread { background: #eef2ff; border-color: #c5cae9; }
+    .notif-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .notif-badge { background: #00006e; color: #fff; padding: 3px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .notif-date  { color: #999; font-size: 0.78rem; }
+    .notif-message { color: #444; font-size: 0.9rem; line-height: 1.6; margin-bottom: 10px; }
+    .notif-action { background: #e8f5e9; border-radius: 8px; padding: 12px 16px; border-left: 4px solid #2e7d32; }
+    .notif-action strong { color: #1b5e20; font-size: 0.85rem; display: block; margin-bottom: 4px; }
+    .notif-action p { color: #2e7d32; font-size: 0.88rem; line-height: 1.6; }
+</style>
+{% endblock %}
