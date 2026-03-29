@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 import os
@@ -28,7 +28,6 @@ def get_db():
     return supabase
 
 
-# ─── Crime Data ───────────────────────────────────────────────────────────────
 
 CRIMES = {
     'ragging': {
@@ -262,7 +261,6 @@ CRIMES = {
 }
 
 
-# ─── Auth Decorators ──────────────────────────────────────────────────────────
 
 def login_required(f):
     @wraps(f)
@@ -281,7 +279,6 @@ def admin_required(f):
     return decorated
 
 
-# ─── Routes ───────────────────────────────────────────────────────────────────
 
 @app.route('/')
 def index():
@@ -564,7 +561,7 @@ def get_db():
     return supabase
 
 
-# ─── Crime Data ───────────────────────────────────────────────────────────────
+
 
 CRIMES = {
     'ragging': {
@@ -798,7 +795,6 @@ CRIMES = {
 }
 
 
-# ─── Auth Decorators ──────────────────────────────────────────────────────────
 
 def login_required(f):
     @wraps(f)
@@ -817,7 +813,6 @@ def admin_required(f):
     return decorated
 
 
-# ─── Routes ───────────────────────────────────────────────────────────────────
 
 @app.route('/')
 def index():
@@ -1070,4 +1065,3 @@ def update_report_status(report_id):
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
->>>>>>> 99548e130a923a9864ad0e8fcb481a2110430117
