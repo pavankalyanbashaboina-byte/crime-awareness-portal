@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 {% extends "base.html" %}
 {% block title %}Student Crimes - Crime Awareness Portal{% endblock %}
@@ -43,4 +44,51 @@
 <style>
     .crime-btn { display: block; text-decoration: none; color: #fff; }
 </style>
+=======
+
+{% extends "base.html" %}
+{% block title %}Student Crimes - Crime Awareness Portal{% endblock %}
+
+{% block nav %}
+    <span class="user-badge">{{ role }} ({{ user_id }})</span>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+{% endblock %}
+
+{% block content %}
+<section class="crime-section">
+    <h2>Crimes by Students</h2>
+    <p>Click on a crime to learn more about its legal implications, consequences, and applicable laws.</p>
+    <div class="buttons">
+        <a href="{{ url_for('crime_detail', crime_id='ragging') }}" class="crime-btn purple">
+            <h3>🚨 Ragging</h3><p>Harassing or bullying juniors in any form</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='drug') }}" class="crime-btn pink">
+            <h3>💊 Drug Use/Distribution</h3><p>Possessing or supplying illegal substances</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='violence') }}" class="crime-btn orange">
+            <h3>👊 Physical Violence</h3><p>Causing harm through force or aggression</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='cyberbullying') }}" class="crime-btn magenta">
+            <h3>💻 Cyberbullying</h3><p>Harassing others using digital platforms</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='cheating') }}" class="crime-btn green">
+            <h3>📝 Exam Cheating</h3><p>Using unfair means in academic evaluations</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='theft') }}" class="crime-btn purple">
+            <h3>🔓 Theft</h3><p>Stealing another person's property</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='harassment') }}" class="crime-btn pink">
+            <h3>⚠️ Sexual Harassment</h3><p>Unwanted sexual behavior or advances</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='vandalism') }}" class="crime-btn orange">
+            <h3>🏚️ Vandalism</h3><p>Damaging college or public property</p>
+        </a>
+    </div>
+</section>
+
+<style>
+    .crime-btn { display: block; text-decoration: none; color: #fff; }
+</style>
+>>>>>>> 99548e130a923a9864ad0e8fcb481a2110430117
 {% endblock %}

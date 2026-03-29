@@ -10,4 +10,8 @@ services:
       - key: SUPABASE_KEY
         sync: false
       - key: SECRET_KEY
+<<<<<<< HEAD
         sync: false
+=======
+        sync: false
+>>>>>>> 99548e130a923a9864ad0e8fcb481a2110430117
