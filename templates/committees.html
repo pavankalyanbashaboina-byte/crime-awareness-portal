@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+{% block title %}Committees - Crime Awareness Portal{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">{% endblock %}
+
+{% block nav %}
+    <span>{{ role }} ({{ user_id }})</span>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<section class="committees-section">
+    <h2>Committees Handling These Crimes</h2>
+    <p>Learn about the internal authorities responsible for addressing various misconduct and crimes.</p>
+    <div class="committees-list">
+        <div class="committee-card">
+            <h3>Internal Complaints Committee (ICC)</h3>
+            <p>The ICC is responsible for handling complaints related to sexual harassment and ensuring a safe environment for all members of the college community.</p>
+            <ul>
+                <li>Handles sexual harassment cases</li>
+                <li>Ensures confidentiality</li>
+                <li>Provides support to victims</li>
+            </ul>
+        </div>
+        <div class="committee-card">
+            <h3>Anti-Ragging Squad</h3>
+            <p>The Anti-Ragging Squad monitors and prevents ragging incidents on campus, taking swift action against any form of ragging.</p>
+            <ul>
+                <li>Monitors ragging activities</li>
+                <li>Conducts awareness programs</li>
+                <li>Imposes penalties on offenders</li>
+            </ul>
+        </div>
+        <div class="committee-card">
+            <h3>Disciplinary Committee</h3>
+            <p>This committee oversees general disciplinary matters, including academic misconduct, vandalism, and other violations of college rules.</p>
+            <ul>
+                <li>Reviews disciplinary cases</li>
+                <li>Imposes academic penalties</li>
+                <li>Promotes ethical conduct</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+
+{% extends "base.html" %}
+{% block title %}Shared Crimes - Crime Awareness Portal{% endblock %}
+
+{% block nav %}
+    <span class="user-badge">{{ role }} ({{ user_id }})</span>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+{% endblock %}
+
+{% block content %}
+<section class="crime-section">
+    <h2>Crimes by Both Students and Faculty</h2>
+    <p>Click on a crime to learn more about its legal implications, consequences, and applicable laws.</p>
+    <div class="buttons">
+        <a href="{{ url_for('crime_detail', crime_id='cybercrime') }}" class="crime-btn purple">
+            <h3>🖥️ Cybercrime</h3><p>Illegal activities conducted through digital means</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='defamation') }}" class="crime-btn pink">
+            <h3>🗣️ Defamation</h3><p>Publishing false statements to damage someone's reputation</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='forgery') }}" class="crime-btn orange">
+            <h3>📝 Forgery of Documents</h3><p>Creating or altering documents with false information</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='identity') }}" class="crime-btn magenta">
+            <h3>🪪 Identity Theft</h3><p>Using someone else's personal information without permission</p>
+        </a>
+        <a href="{{ url_for('crime_detail', crime_id='financial') }}" class="crime-btn green">
+            <h3>💸 Financial Fraud</h3><p>Deceiving others for financial gain</p>
+        </a>
+    </div>
+</section>
+
+<style>
+    .crime-btn { display: block; text-decoration: none; color: #fff; }
+</style>
+{% endblock %}
