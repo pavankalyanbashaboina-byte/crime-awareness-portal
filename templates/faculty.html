@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {% extends "base.html" %}
 {% block title %}Faculty Crimes - Crime Awareness Portal{% endblock %}
 
@@ -37,44 +37,4 @@
 <style>
     .crime-btn { display: block; text-decoration: none; color: #fff; }
 </style>
-=======
-{% extends "base.html" %}
-{% block title %}Faculty Crimes - Crime Awareness Portal{% endblock %}
-
-{% block nav %}
-    <span class="user-badge">{{ role }} ({{ user_id }})</span>
-    <a href="{{ url_for('dashboard') }}">Dashboard</a>
-    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
-{% endblock %}
-
-{% block content %}
-<section class="crime-section">
-    <h2>Crimes by Faculty</h2>
-    <p>Click on a crime to learn more about its legal implications, consequences, and applicable laws.</p>
-    <div class="buttons">
-        <a href="{{ url_for('crime_detail', crime_id='sexualHarassmentFaculty') }}" class="crime-btn purple">
-            <h3>⚠️ Sexual Harassment</h3><p>Misconduct involving inappropriate behavior</p>
-        </a>
-        <a href="{{ url_for('crime_detail', crime_id='bribery') }}" class="crime-btn pink">
-            <h3>💰 Bribery/Corruption</h3><p>Accepting benefits for unfair advantage</p>
-        </a>
-        <a href="{{ url_for('crime_detail', crime_id='fraud') }}" class="crime-btn orange">
-            <h3>📄 Academic Fraud</h3><p>Manipulating academic records or research</p>
-        </a>
-        <a href="{{ url_for('crime_detail', crime_id='discrimination') }}" class="crime-btn magenta">
-            <h3>🚫 Discrimination</h3><p>Unfair treatment based on identity</p>
-        </a>
-        <a href="{{ url_for('crime_detail', crime_id='authority') }}" class="crime-btn green">
-            <h3>👤 Misuse of Authority</h3><p>Abusing power or position</p>
-        </a>
-        <a href="{{ url_for('crime_detail', crime_id='leakage') }}" class="crime-btn purple">
-            <h3>📋 Exam Paper Leakage</h3><p>Unauthorized sharing of exam content</p>
-        </a>
-    </div>
-</section>
-
-<style>
-    .crime-btn { display: block; text-decoration: none; color: #fff; }
-</style>
->>>>>>> 99548e130a923a9864ad0e8fcb481a2110430117
 {% endblock %}
