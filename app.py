@@ -9,8 +9,8 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'crimeportal2024')
 
-SUPABASE_URL = os.getenv('SUPABASE_URL', '')
-SUPABASE_KEY = os.getenv('SUPABASE_KEY', '')
+SUPABASE_URL = os.getenv('SUPABASE_URL', 'yuoimqqlcjxymohkitjg')
+SUPABASE_KEY = os.getenv('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1b2ltcXFsY2p4eW1vaGtpdGpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0OTQyNjQsImV4cCI6MjA5MDA3MDI2NH0.2tEHkVYeGJxt9qg_t9wyLG4xkqqYBA0JRSLlxl9Cuns')
 
 supabase = None
 if SUPABASE_URL and SUPABASE_KEY:
