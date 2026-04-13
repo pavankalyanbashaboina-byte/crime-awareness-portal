@@ -215,47 +215,47 @@
 
         /* ══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
         @media (max-width: 768px) {
-            header { padding: 8px 14px; min-height: auto; gap: 8px; }
-            .logo-icon { width: 110px; height: 52px; padding: 4px 6px; border-radius: 7px; }
-            .logo-text .college-name { font-size: 0.75rem; }
-            .logo-text .portal-name  { font-size: 0.6rem; }
-            header h1 { font-size: 0.78rem; margin: 0 6px; }
-            header nav a { font-size: 0.68rem; padding: 4px 8px; }
-            header nav span.user-badge { font-size: 0.65rem; padding: 3px 7px; display: none; }
+            header { padding: 10px 14px; }
+            .logo-icon { width: 120px; height: 56px; padding: 5px 8px; }
+            .logo-text .college-name { font-size: 0.82rem; }
+            header h1 { font-size: 0.85rem; }
+            header nav a { font-size: 0.75rem; padding: 6px 10px; }
+            header nav span.user-badge { display: none; }
+            main { padding: 18px 14px; }
 
-            main { padding: 16px 12px; }
+            /* 1 column cards - bigger and easier to tap */
+            .card-container { grid-template-columns: 1fr; gap: 14px; }
+            .card { padding: 22px 20px; }
+            .card-icon { font-size: 2.2rem; }
+            .card h3 { font-size: 1.1rem; }
+            .card p  { font-size: 0.88rem; }
 
-            .card-container { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .card { padding: 16px 14px; border-radius: 12px; }
-            .card-icon { font-size: 1.5rem; margin-bottom: 8px; }
-            .card h3 { font-size: 0.82rem; }
-            .card p  { font-size: 0.7rem; }
+            /* 1 column crime buttons */
+            .buttons { grid-template-columns: 1fr; gap: 12px; }
+            .crime-btn { padding: 20px 18px; }
+            .crime-btn h3 { font-size: 1rem; }
+            .crime-btn p  { font-size: 0.82rem; }
 
-            .buttons { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .crime-btn { padding: 14px 12px; }
-            .crime-btn h3 { font-size: 0.78rem; }
-            .crime-btn p  { font-size: 0.65rem; }
-
-            .auth-box { padding: 24px 18px; }
-            .auth-box h2 { font-size: 1.15rem; }
-            .role-btn { font-size: 0.78rem; padding: 10px 4px; }
+            .auth-box { padding: 28px 20px; }
+            .auth-box h2 { font-size: 1.3rem; }
+            .role-btn { font-size: 0.9rem; padding: 14px 6px; }
 
             .committees-list { grid-template-columns: 1fr; }
+            .analytics-grid { grid-template-columns: 1fr 1fr; }
+            .analytics-num  { font-size: 2rem; }
 
-            .analytics-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .analytics-num  { font-size: 1.8rem; }
-
-            .report-section form { padding: 18px 14px; }
+            .report-section form { padding: 20px 16px; }
             .form-row { grid-template-columns: 1fr; }
+            .form-group input, .form-group select, .form-group textarea { font-size: 1rem; padding: 12px 14px; }
+            .submit-btn { font-size: 1rem; padding: 14px; }
+            .dashboard h2 { font-size: 1.6rem; }
+            .crime-section h2 { font-size: 1.5rem; }
         }
 
         @media (max-width: 400px) {
-            .logo-icon { width: 90px; height: 44px; }
+            .logo-icon { width: 100px; height: 48px; }
             header h1 { display: none; }
-            .card-container { grid-template-columns: 1fr 1fr; }
-            .buttons { grid-template-columns: 1fr 1fr; }
-            .role-buttons { gap: 5px; }
-            .role-btn { font-size: 0.72rem; padding: 9px 3px; }
+            header nav a { font-size: 0.7rem; padding: 5px 8px; }
         }
     </style>
 </head>
