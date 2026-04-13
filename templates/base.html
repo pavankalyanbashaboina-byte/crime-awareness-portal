@@ -8,32 +8,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background: #eef2f9; color: #1a1a2e; min-height: 100vh; display: flex; flex-direction: column; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #eef2f9;
+            color: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
         /* ══ HEADER ══ */
         header {
             background: linear-gradient(90deg, #00006e 0%, #0000b3 100%);
-            min-height: 90px;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 28px;
+            padding: 10px 20px;
             position: sticky;
             top: 0;
             z-index: 200;
             box-shadow: 0 3px 14px rgba(0,0,120,0.45);
-            gap: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        /* ── Logo block ── */
         .logo-block {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-shrink: 0;
             text-decoration: none;
         }
-        /* The shield icon — always visible */
         .logo-icon {
             width: 160px;
             height: 80px;
@@ -46,88 +53,108 @@
             overflow: hidden;
             padding: 8px 12px;
         }
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        /* SVG fallback shown when img fails */
-        .logo-icon .svg-fallback {
-            display: none;
-            width: 100%;
-            height: 100%;
-        }
-        .logo-icon img.broken + .svg-fallback { display: flex; }
+        .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-icon .svg-fallback { display: none; width: 100%; height: 100%; align-items: center; justify-content: center; }
 
         .logo-text { display: flex; flex-direction: column; line-height: 1.3; }
-        .logo-text .college-name { color: #ffffff; font-size: 0.95rem; font-weight: 700; white-space: nowrap; letter-spacing: 0.01em; }
-        .logo-text .portal-name  { color: #a8b4f8; font-size: 0.7rem; font-weight: 400; white-space: nowrap; }
+        .logo-text .college-name { color: #fff; font-size: 0.88rem; font-weight: 700; white-space: nowrap; }
+        .logo-text .portal-name  { color: #a8b4f8; font-size: 0.65rem; font-weight: 400; white-space: nowrap; }
 
-        header h1 { color: #fff; font-size: 1rem; font-weight: 600; text-align: center; flex: 1; white-space: nowrap; letter-spacing: 0.04em; text-transform: uppercase; }
+        header h1 {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+            flex: 1;
+            white-space: nowrap;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-        /* ── Nav ── */
-        header nav { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-        header nav a { color: #dde4ff; text-decoration: none; font-size: 0.78rem; font-weight: 500; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s; white-space: nowrap; }
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        header nav a {
+            color: #dde4ff;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
         header nav a:hover { background: rgba(255,255,255,0.18); color: #fff; }
         header nav a.btn-logout { background: rgba(255,60,60,0.2); border-color: rgba(255,80,80,0.35); color: #ffaaaa; }
         header nav a.btn-logout:hover { background: rgba(255,60,60,0.38); color: #fff; }
-        header nav span.user-badge { color: #a8b4f8; font-size: 0.75rem; padding: 5px 10px; background: rgba(255,255,255,0.08); border-radius: 20px; white-space: nowrap; }
+        header nav span.user-badge { color: #a8b4f8; font-size: 0.7rem; padding: 4px 8px; background: rgba(255,255,255,0.08); border-radius: 20px; white-space: nowrap; }
 
         /* ══ MAIN & FOOTER ══ */
-        main { flex: 1; padding: 32px 24px; max-width: 1200px; margin: 0 auto; width: 100%; }
-        footer { background: linear-gradient(90deg,#00006e,#0000b3); color: #a8b4f8; text-align: center; padding: 20px; font-size: 0.82rem; }
-        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; flex-wrap: wrap; }
-        .footer-links a { color: #a8b4f8; text-decoration: none; }
+        main { flex: 1; padding: 24px 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
+        footer { background: linear-gradient(90deg,#00006e,#0000b3); color: #a8b4f8; text-align: center; padding: 18px 16px; font-size: 0.78rem; }
+        .footer-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+        .footer-links a { color: #a8b4f8; text-decoration: none; font-size: 0.76rem; }
         .footer-links a:hover { color: #fff; }
 
         /* ══ MESSAGES ══ */
-        .flash { padding: 12px 18px; border-radius: 8px; margin-bottom: 16px; font-weight: 500; font-size: 0.9rem; }
+        .flash { padding: 12px 16px; border-radius: 8px; margin-bottom: 14px; font-weight: 500; font-size: 0.88rem; }
         .flash-success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
         .flash-error   { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
-        .error-msg   { color: #c0392b; font-size: 0.83rem; margin: 6px 0 4px; min-height: 16px; }
-        .success-msg { color: #155724; font-size: 0.88rem; padding: 10px 14px; background: #d4edda; border-radius: 8px; margin: 8px 0; border-left: 4px solid #28a745; }
+        .error-msg   { color: #c0392b; font-size: 0.82rem; margin: 6px 0 4px; min-height: 16px; }
+        .success-msg { color: #155724; font-size: 0.86rem; padding: 10px 14px; background: #d4edda; border-radius: 8px; margin: 8px 0; border-left: 4px solid #28a745; }
 
         /* ══ AUTH ══ */
-        .auth-container { display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 76px - 80px); padding: 24px; }
-        .auth-box { background: #fff; border-radius: 16px; padding: 44px 40px; width: 100%; max-width: 440px; box-shadow: 0 6px 32px rgba(0,0,139,0.13); border-top: 4px solid #0000b3; }
-        .auth-box h2 { color: #00006e; font-size: 1.45rem; font-weight: 700; margin-bottom: 28px; text-align: center; }
-        .role-buttons { display: flex; flex-direction: row; gap: 10px; justify-content: center; }
-        .role-btn { flex: 1; padding: 13px 8px; border: none; border-radius: 10px; font-size: 0.9rem; font-family: 'Poppins',sans-serif; font-weight: 600; cursor: pointer; color: #fff; transition: transform 0.15s, box-shadow 0.15s; }
-        .role-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+        .auth-container { display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 70px - 80px); padding: 16px; }
+        .auth-box { background: #fff; border-radius: 16px; padding: 32px 24px; width: 100%; max-width: 420px; box-shadow: 0 6px 32px rgba(0,0,139,0.13); border-top: 4px solid #0000b3; }
+        .auth-box h2 { color: #00006e; font-size: 1.3rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
+        .role-buttons { display: flex; flex-direction: row; gap: 8px; justify-content: center; }
+        .role-btn { flex: 1; padding: 12px 6px; border: none; border-radius: 10px; font-size: 0.85rem; font-family: 'Poppins',sans-serif; font-weight: 600; cursor: pointer; color: #fff; transition: transform 0.15s; }
+        .role-btn:hover { transform: translateY(-2px); }
         .student-btn { background: linear-gradient(135deg,#1565C0,#1976D2); }
         .faculty-btn { background: linear-gradient(135deg,#283593,#3949AB); }
         .admin-btn   { background: linear-gradient(135deg,#1a237e,#283593); }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #444; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #c5cae9; border-radius: 9px; font-size: 0.93rem; font-family: 'Poppins',sans-serif; background: #f8f9ff; transition: border-color 0.2s; color: #222; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: #444; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #c5cae9; border-radius: 9px; font-size: 0.9rem; font-family: 'Poppins',sans-serif; background: #f8f9ff; transition: border-color 0.2s; color: #222; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #0000b3; background: #fff; box-shadow: 0 0 0 3px rgba(0,0,179,0.08); }
-        .form-group textarea { min-height: 110px; resize: vertical; }
-        .checkbox-group label { display: flex; align-items: center; gap: 10px; font-weight: 500; cursor: pointer; text-transform: none; letter-spacing: 0; font-size: 0.88rem; }
-        .auth-btn, .submit-btn { width: 100%; padding: 13px; background: linear-gradient(135deg,#00006e,#0000b3); color: #fff; border: none; border-radius: 9px; font-size: 0.97rem; font-family: 'Poppins',sans-serif; font-weight: 600; cursor: pointer; margin-top: 6px; transition: opacity 0.2s, transform 0.15s; }
-        .auth-btn:hover, .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-        .back-btn { width: 100%; padding: 11px; background: transparent; color: #0000b3; border: 1.5px solid #0000b3; border-radius: 9px; font-size: 0.88rem; font-family: 'Poppins',sans-serif; font-weight: 500; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .checkbox-group label { display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; text-transform: none; letter-spacing: 0; font-size: 0.86rem; }
+
+        .auth-btn, .submit-btn { width: 100%; padding: 12px; background: linear-gradient(135deg,#00006e,#0000b3); color: #fff; border: none; border-radius: 9px; font-size: 0.95rem; font-family: 'Poppins',sans-serif; font-weight: 600; cursor: pointer; margin-top: 6px; transition: opacity 0.2s; }
+        .auth-btn:hover, .submit-btn:hover { opacity: 0.9; }
+        .back-btn { width: 100%; padding: 10px; background: transparent; color: #0000b3; border: 1.5px solid #0000b3; border-radius: 9px; font-size: 0.86rem; font-family: 'Poppins',sans-serif; font-weight: 500; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
         .back-btn:hover { background: #eef2ff; }
-        .auth-box p { text-align: center; margin: 14px 0 0; font-size: 0.85rem; color: #666; }
+        .auth-box p { text-align: center; margin: 12px 0 0; font-size: 0.83rem; color: #666; }
         .auth-box p a { color: #0000b3; font-weight: 600; }
 
         /* ══ DASHBOARD CARDS ══ */
-        .dashboard h2, .admin-dashboard h2 { color: #00006e; font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
-        .dashboard > p, .admin-dashboard > p { color: #666; margin-bottom: 32px; font-size: 0.95rem; }
-        .card-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 22px; }
-        .card { background: linear-gradient(145deg,#00006e,#0000b3); color: #fff; border-radius: 16px; padding: 28px 24px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border-bottom: 4px solid rgba(255,255,255,0.15); text-decoration: none; display: block; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,139,0.35); }
-        .card-icon { font-size: 2rem; margin-bottom: 12px; }
-        .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: #fff; }
-        .card p  { font-size: 0.83rem; color: #c5cae9; line-height: 1.6; }
+        .dashboard h2, .admin-dashboard h2 { color: #00006e; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+        .dashboard > p, .admin-dashboard > p { color: #666; margin-bottom: 24px; font-size: 0.9rem; }
+        .card-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+        .card { background: linear-gradient(145deg,#00006e,#0000b3); color: #fff; border-radius: 14px; padding: 22px 18px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border-bottom: 4px solid rgba(255,255,255,0.15); text-decoration: none; display: block; }
+        .card:hover, .card:active { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,139,0.35); }
+        .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .card h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+        .card p  { font-size: 0.76rem; color: #c5cae9; line-height: 1.55; }
 
         /* ══ CRIME BUTTONS ══ */
-        .crime-section h2 { color: #00006e; font-size: 1.55rem; font-weight: 700; margin-bottom: 6px; }
-        .crime-section > p { color: #666; margin-bottom: 24px; }
-        .buttons { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 28px; }
-        .crime-btn { padding: 22px 18px; border: none; border-radius: 13px; cursor: pointer; text-align: left; color: #fff; transition: transform 0.15s, box-shadow 0.15s; display: block; text-decoration: none; }
-        .crime-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); color: #fff; }
-        .crime-btn h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 7px; font-family: 'Poppins',sans-serif; }
-        .crime-btn p  { font-size: 0.75rem; opacity: 0.88; line-height: 1.45; font-family: 'Poppins',sans-serif; }
+        .crime-section h2 { color: #00006e; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+        .crime-section > p { color: #666; margin-bottom: 20px; font-size: 0.88rem; }
+        .buttons { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .crime-btn { padding: 18px 14px; border: none; border-radius: 12px; cursor: pointer; text-align: left; color: #fff; transition: transform 0.15s; display: block; text-decoration: none; }
+        .crime-btn:hover, .crime-btn:active { transform: translateY(-2px); color: #fff; }
+        .crime-btn h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; font-family: 'Poppins',sans-serif; }
+        .crime-btn p  { font-size: 0.7rem; opacity: 0.88; line-height: 1.4; font-family: 'Poppins',sans-serif; }
         .crime-btn.purple  { background: linear-gradient(135deg,#6a1b9a,#8e24aa); }
         .crime-btn.pink    { background: linear-gradient(135deg,#ad1457,#c2185b); }
         .crime-btn.orange  { background: linear-gradient(135deg,#e65100,#f4511e); }
@@ -135,45 +162,105 @@
         .crime-btn.green   { background: linear-gradient(135deg,#2e7d32,#388e3c); }
 
         /* ══ COMMITTEES ══ */
-        .committees-section h2 { color: #00006e; font-size: 1.55rem; font-weight: 700; margin-bottom: 6px; }
-        .committees-section > p { color: #666; margin-bottom: 28px; }
-        .committees-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 22px; }
-        .committee-card { background: #fff; border-radius: 14px; padding: 26px; box-shadow: 0 3px 14px rgba(0,0,139,0.1); border-top: 5px solid #0000b3; }
-        .committee-card h3 { color: #00006e; font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
-        .committee-card p  { font-size: 0.86rem; color: #555; line-height: 1.65; margin-bottom: 14px; }
-        .committee-card ul { padding-left: 18px; }
-        .committee-card li { font-size: 0.83rem; color: #666; margin-bottom: 5px; }
+        .committees-section h2 { color: #00006e; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+        .committees-section > p { color: #666; margin-bottom: 24px; font-size: 0.88rem; }
+        .committees-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        .committee-card { background: #fff; border-radius: 14px; padding: 22px; box-shadow: 0 3px 14px rgba(0,0,139,0.1); border-top: 5px solid #0000b3; }
+        .committee-card h3 { color: #00006e; font-size: 0.98rem; font-weight: 700; margin-bottom: 10px; }
+        .committee-card p  { font-size: 0.84rem; color: #555; line-height: 1.65; margin-bottom: 12px; }
+        .committee-card ul { padding-left: 16px; }
+        .committee-card li { font-size: 0.82rem; color: #666; margin-bottom: 4px; }
 
-        /* ══ REPORT ══ */
-        .report-section h2 { color: #00006e; font-size: 1.55rem; font-weight: 700; margin-bottom: 6px; }
-        .report-section > p { color: #666; margin-bottom: 28px; }
-        .report-section form { background: #fff; padding: 36px; border-radius: 16px; box-shadow: 0 3px 18px rgba(0,0,139,0.1); max-width: 660px; border-top: 4px solid #0000b3; }
+        /* ══ REPORT FORM ══ */
+        .report-section h2 { color: #00006e; font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+        .report-section > p { color: #666; margin-bottom: 24px; font-size: 0.88rem; }
+        .report-section form { background: #fff; padding: 24px 20px; border-radius: 14px; box-shadow: 0 3px 18px rgba(0,0,139,0.1); max-width: 100%; border-top: 4px solid #0000b3; }
+        .form-section-title { font-size: 0.92rem; font-weight: 700; color: #00006e; margin: 20px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #e8eaf6; }
+        .form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
 
         /* ══ ADMIN ══ */
-        .admin-section { background: #fff; border-radius: 16px; padding: 30px; margin-top: 30px; box-shadow: 0 3px 18px rgba(0,0,139,0.1); }
-        .admin-section h3 { color: #00006e; font-size: 1.15rem; font-weight: 700; margin-bottom: 18px; }
-        .analytics-grid { display: flex; gap: 20px; flex-wrap: wrap; }
-        .analytics-card { border-radius: 14px; padding: 28px 36px; text-align: center; flex: 1; min-width: 140px; }
+        .admin-section { background: #fff; border-radius: 14px; padding: 22px 18px; margin-top: 24px; box-shadow: 0 3px 18px rgba(0,0,139,0.1); overflow-x: auto; }
+        .admin-section h3 { color: #00006e; font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+        .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .analytics-card { border-radius: 12px; padding: 18px 14px; text-align: center; }
         .analytics-card.total    { background: #e3f2fd; }
         .analytics-card.pending  { background: #fff3e0; }
         .analytics-card.resolved { background: #e8f5e9; }
-        .analytics-num   { display: block; font-size: 2.8rem; font-weight: 700; color: #00006e; }
-        .analytics-label { font-size: 0.88rem; color: #666; margin-top: 5px; display: block; font-weight: 500; }
-        .empty-state { color: #999; text-align: center; padding: 28px; font-size: 0.9rem; }
-        .reports-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .reports-table th { background: linear-gradient(90deg,#00006e,#0000b3); color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; }
-        .reports-table td { padding: 11px 14px; border-bottom: 1px solid #e8eaf6; vertical-align: middle; }
+        .analytics-num   { display: block; font-size: 2.2rem; font-weight: 700; color: #00006e; }
+        .analytics-label { font-size: 0.82rem; color: #666; margin-top: 4px; display: block; font-weight: 500; }
+        .empty-state { color: #999; text-align: center; padding: 24px; font-size: 0.88rem; }
+        .reports-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; min-width: 600px; }
+        .reports-table th { background: linear-gradient(90deg,#00006e,#0000b3); color: #fff; padding: 10px 10px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .reports-table td { padding: 10px 10px; border-bottom: 1px solid #e8eaf6; vertical-align: middle; }
         .reports-table tr:hover td { background: #f5f6ff; }
-        .reports-table select { padding: 5px 10px; border-radius: 7px; border: 1px solid #c5cae9; font-size: 0.8rem; }
-        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.76rem; font-weight: 600; text-transform: capitalize; display: inline-block; }
+        .reports-table select { padding: 4px 8px; border-radius: 6px; border: 1px solid #c5cae9; font-size: 0.76rem; }
+        .status-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: capitalize; display: inline-block; }
         .status-pending      { background: #fff3e0; color: #e65100; }
         .status-under_review { background: #e3f2fd; color: #1565c0; }
         .status-resolved     { background: #e8f5e9; color: #2e7d32; }
+        .action-btn { padding: 5px 10px; background: linear-gradient(135deg,#00006e,#0000b3); color: #fff; border: none; border-radius: 7px; font-size: 0.72rem; font-family: 'Poppins',sans-serif; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+        /* ══ NOTIFICATIONS ══ */
+        .notifications-panel { background: #fff; border-radius: 14px; padding: 20px; margin-bottom: 24px; box-shadow: 0 3px 16px rgba(0,0,139,0.1); border-left: 5px solid #0000b3; }
+        .notifications-panel h3 { color: #00006e; font-size: 1rem; font-weight: 700; margin-bottom: 14px; }
+        .notification-card { background: #f5f6ff; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid #e8eaf6; }
+        .notification-card.unread { background: #eef2ff; border-color: #c5cae9; }
+        .notif-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px; }
+        .notif-badge { background: #00006e; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; }
+        .notif-date  { color: #999; font-size: 0.72rem; }
+        .notif-message { color: #444; font-size: 0.86rem; line-height: 1.6; margin-bottom: 8px; }
+        .notif-action { background: #e8f5e9; border-radius: 8px; padding: 10px 14px; border-left: 4px solid #2e7d32; }
+        .notif-action strong { color: #1b5e20; font-size: 0.82rem; display: block; margin-bottom: 4px; }
+        .notif-action p { color: #2e7d32; font-size: 0.84rem; line-height: 1.6; }
+
+        /* ══ MOBILE RESPONSIVE ══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            header { padding: 8px 14px; min-height: auto; gap: 8px; }
+            .logo-icon { width: 110px; height: 52px; padding: 4px 6px; border-radius: 7px; }
+            .logo-text .college-name { font-size: 0.75rem; }
+            .logo-text .portal-name  { font-size: 0.6rem; }
+            header h1 { font-size: 0.78rem; margin: 0 6px; }
+            header nav a { font-size: 0.68rem; padding: 4px 8px; }
+            header nav span.user-badge { font-size: 0.65rem; padding: 3px 7px; display: none; }
+
+            main { padding: 16px 12px; }
+
+            .card-container { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .card { padding: 16px 14px; border-radius: 12px; }
+            .card-icon { font-size: 1.5rem; margin-bottom: 8px; }
+            .card h3 { font-size: 0.82rem; }
+            .card p  { font-size: 0.7rem; }
+
+            .buttons { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .crime-btn { padding: 14px 12px; }
+            .crime-btn h3 { font-size: 0.78rem; }
+            .crime-btn p  { font-size: 0.65rem; }
+
+            .auth-box { padding: 24px 18px; }
+            .auth-box h2 { font-size: 1.15rem; }
+            .role-btn { font-size: 0.78rem; padding: 10px 4px; }
+
+            .committees-list { grid-template-columns: 1fr; }
+
+            .analytics-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .analytics-num  { font-size: 1.8rem; }
+
+            .report-section form { padding: 18px 14px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 400px) {
+            .logo-icon { width: 90px; height: 44px; }
+            header h1 { display: none; }
+            .card-container { grid-template-columns: 1fr 1fr; }
+            .buttons { grid-template-columns: 1fr 1fr; }
+            .role-buttons { gap: 5px; }
+            .role-btn { font-size: 0.72rem; padding: 9px 3px; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <!-- LOGO: image with built-in SVG fallback — always visible -->
         <div class="logo-block">
             <div class="logo-icon">
                 <img
@@ -181,10 +268,8 @@
                     alt="Pragati Logo"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 />
-                <!-- SVG fallback shield — shows when image is missing -->
                 <svg style="display:none; width:100%; height:100%; align-items:center; justify-content:center;" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24 4L6 12V24C6 33.6 13.8 42.6 24 45C34.2 42.6 42 33.6 42 24V12L24 4Z" fill="#00008B"/>
-                    <path d="M24 4L6 12V24C6 33.6 13.8 42.6 24 45C34.2 42.6 42 33.6 42 24V12L24 4Z" stroke="#a8b4f8" stroke-width="1.5" fill="none"/>
                     <text x="24" y="28" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Poppins,sans-serif">P</text>
                 </svg>
             </div>
